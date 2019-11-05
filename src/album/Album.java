@@ -15,6 +15,8 @@ public class Album {
     private String name;
     private String artist;
     private String genre;
+    private String cover;
+
 
     public int getId() {
         return id;
@@ -46,6 +48,14 @@ public class Album {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+    
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
     
 }

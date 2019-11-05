@@ -49,4 +49,17 @@ public class UserData extends SqlConnection{
         disconnect();
     }
     
+    public void addLib(int user_id, int album_id) throws SQLException, Exception{
+        String query = "INSERT INTO libraries (user_id, album_id) VALUES(?,?)";
+        
+        PreparedStatement statement = connectParameters().prepareStatement(query);
+        statement.setInt(1, user_id);
+        statement.setInt(2, album_id);
+        
+        statement.executeUpdate();
+        
+        disconnect();
+        
+    }
+    
 }

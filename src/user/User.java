@@ -52,4 +52,11 @@ public class User {
         this.name = name;
     }
     
+    public ArrayList<Album> getLibraries() {
+        return libraries;
+    }
+
+    public void setLibraries(ArrayList<Album> libraries) {
+        this.libraries = libraries;
+    }
 }
