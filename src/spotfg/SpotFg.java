@@ -38,7 +38,8 @@ public class SpotFg {
                 a.setArtist(al.get(i).getArtist());
                 a.setGenre(al.get(i).getGenre());
                 a.setCover(al.get(i).getCover());
-                System.out.println(a.getId() + " " + a.getName() + " " + a.getArtist() + " " + a.getGenre() + " " + a.getCover());
+                System.out.println("id " + a.getId() + " " + "Nome " + a.getName() + 
+                        " " + "Artista " + a.getArtist() + " " + "Gênero " + a.getGenre() + " " + a.getCover());
             }
         } catch (Exception e) {
             System.out.println("Erro " + e);

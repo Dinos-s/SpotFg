@@ -20,6 +20,7 @@ public class AlbumData extends SqlConnection{
     public void insertAlbum(Album a) throws SQLException, Exception{
         
         String query = "INSERT INTO albuns (nome, artista, genero) VALUES (?,?,?)";
+        
         PreparedStatement statement = connectParameters().prepareStatement(query);
         
         statement.setString(1, a.getName());
@@ -33,7 +34,6 @@ public class AlbumData extends SqlConnection{
     }
     
     public ArrayList<Album> selectAllAlbuns() throws SQLException, Exception{
-        
         ArrayList<Album> albumList = new ArrayList<>();
         
         String query = "SELECT id, nome, genero, artista, capa_url FROM albuns Order by nome";
@@ -57,7 +57,6 @@ public class AlbumData extends SqlConnection{
     }
     
     public ArrayList<Album> selectAlbumByName(String s) throws SQLException, Exception{
-        
         ArrayList<Album> albumList = new ArrayList<>();
         
         String query = "SELECT id, nome, genero, artista, capa_url FROM albuns WHERE nome like ?";
@@ -82,7 +81,6 @@ public class AlbumData extends SqlConnection{
     }
     
     public ArrayList<Album> selectAlbumByArtist(String s) throws SQLException, Exception{
-        
         ArrayList<Album> albumList = new ArrayList<>();
         
         
