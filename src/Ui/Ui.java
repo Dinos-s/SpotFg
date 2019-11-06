@@ -35,6 +35,7 @@ public class Ui extends javax.swing.JFrame {
         senhaInput = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
         registerButton = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,6 +50,8 @@ public class Ui extends javax.swing.JFrame {
         loginButton.setText("Entrar");
 
         registerButton.setText("Registrar");
+
+        jLabel2.setText("jLabel2");
 
         javax.swing.GroupLayout LoginLayout = new javax.swing.GroupLayout(Login);
         Login.setLayout(LoginLayout);
@@ -68,11 +71,17 @@ public class Ui extends javax.swing.JFrame {
                                 .addComponent(registerButton))
                             .addComponent(loginButton))))
                 .addContainerGap(231, Short.MAX_VALUE))
+            .addGroup(LoginLayout.createSequentialGroup()
+                .addGap(282, 282, 282)
+                .addComponent(jLabel2)
+                .addContainerGap(317, Short.MAX_VALUE))
         );
         LoginLayout.setVerticalGroup(
             LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LoginLayout.createSequentialGroup()
-                .addContainerGap(160, Short.MAX_VALUE)
+                .addContainerGap(137, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(62, 62, 62)
                 .addComponent(emailInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(senhaInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -80,7 +89,7 @@ public class Ui extends javax.swing.JFrame {
                 .addComponent(loginButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(registerButton)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -139,6 +148,7 @@ public class Ui extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Login;
     private javax.swing.JTextField emailInput;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel registerButton;
     private javax.swing.JTextField senhaInput;
