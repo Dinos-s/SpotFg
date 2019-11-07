@@ -17,8 +17,6 @@ import java.sql.ResultSet;
  */
 public class SqlConnection {
     private Connection connection = null;
-    private Statement statement = null;
-    private ResultSet resultSet = null;
     
     public Statement connect() throws SQLException, Exception{
         String server = "jdbc:postgresql://localhost/spotfg?charSet=LATIN1";

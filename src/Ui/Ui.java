@@ -1,6 +1,12 @@
 package Ui;
 
+import java.awt.Color;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import user.User;
+import user.UserData;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -32,10 +38,11 @@ public class Ui extends javax.swing.JFrame {
 
         Login = new javax.swing.JPanel();
         emailInput = new javax.swing.JTextField();
-        senhaInput = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
         registerButton = new javax.swing.JLabel();
         Logo = new javax.swing.JLabel();
+        senhaInput = new javax.swing.JPasswordField();
+        errorMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,37 +50,65 @@ public class Ui extends javax.swing.JFrame {
 
         emailInput.setBackground(new java.awt.Color(200, 200, 200));
         emailInput.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        emailInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailInputActionPerformed(evt);
-            }
-        });
+        emailInput.setName("emailInput"); // NOI18N
 
-        senhaInput.setBackground(new java.awt.Color(200, 200, 200));
-        senhaInput.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-
-        loginButton.setBackground(null);
         loginButton.setForeground(new java.awt.Color(255, 255, 255));
         loginButton.setText("Entrar");
         loginButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         loginButton.setBorderPainted(false);
+        loginButton.setName("loginButton"); // NOI18N
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
 
         registerButton.setText("Registrar");
+        registerButton.setName("registrar"); // NOI18N
+        registerButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                registerButtonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                registerButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                registerButtonMouseExited(evt);
+            }
+        });
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Logo2.jpg"))); // NOI18N
+
+        senhaInput.setBackground(new java.awt.Color(200, 200, 200));
+        senhaInput.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        senhaInput.setName("senhaInput"); // NOI18N
+
+        errorMessage.setForeground(new java.awt.Color(255, 0, 0));
+        errorMessage.setName("errorMessage"); // NOI18N
 
         javax.swing.GroupLayout LoginLayout = new javax.swing.GroupLayout(Login);
         Login.setLayout(LoginLayout);
         LoginLayout.setHorizontalGroup(
             LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LoginLayout.createSequentialGroup()
-                .addContainerGap(175, Short.MAX_VALUE)
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(emailInput)
-                    .addComponent(senhaInput)
-                    .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(registerButton)
-                    .addComponent(Logo))
+                    .addGroup(LoginLayout.createSequentialGroup()
+                        .addContainerGap(175, Short.MAX_VALUE)
+                        .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(emailInput)
+                            .addComponent(Logo)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginLayout.createSequentialGroup()
+                                .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                    .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(registerButton))
+                                .addGap(152, 152, 152))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(LoginLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(errorMessage))
+                            .addComponent(senhaInput, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(158, Short.MAX_VALUE))
         );
         LoginLayout.setVerticalGroup(
@@ -84,12 +119,16 @@ public class Ui extends javax.swing.JFrame {
                 .addComponent(emailInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(senhaInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(errorMessage)
+                .addGap(8, 8, 8)
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(registerButton)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
+
+        emailInput.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,11 +142,69 @@ public class Ui extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void emailInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailInputActionPerformed
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_emailInputActionPerformed
+        //User u = new User();
+        errorMessage.setText("");
+        UserData ud = new UserData();
+        
+        if(emailInput.getText().trim().equalsIgnoreCase("")||emailInput.getText().trim() == null){
+            
+            errorMessage.setText("Por favor digite seu e-mail");
+            emailInput.requestFocus();
+        
+        }else if(senhaInput.getText().toString().equalsIgnoreCase("")|| senhaInput.getPassword() == null){
+        
+            errorMessage.setText("Por favor digite sua senha");
+            senhaInput.requestFocus();
+            
+        }else{
+            
+            try {
+                String email, senha;
+                email = emailInput.getText().trim();
+                senha = senhaInput.getText().trim();
+                
+                ArrayList<User> user = ud.login(email, senha);
+                
+                
+                
+                if (user.size() != 0) {
+                    //Open the user home page
+                    
+                }else{
+                    
+                    errorMessage.setText("Login ou senha errados!");
+                }
+                
+            } catch (Exception s) {
+                errorMessage.setText(s.getMessage());
+            }
+            
+            
+        }
+    }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void registerButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerButtonMouseEntered
+        // TODO add your handling code here:
+        Color c = Color.decode("#8c8c8c");
+        registerButton.setForeground(c);
+    }//GEN-LAST:event_registerButtonMouseEntered
+
+    private void registerButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerButtonMouseExited
+        // TODO add your handling code here:
+        Color c = Color.decode("#bbbbbb");
+        registerButton.setForeground(c);
+    }//GEN-LAST:event_registerButtonMouseExited
+
+    private void registerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerButtonMouseClicked
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_registerButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -148,8 +245,9 @@ public class Ui extends javax.swing.JFrame {
     private javax.swing.JPanel Login;
     private javax.swing.JLabel Logo;
     private javax.swing.JTextField emailInput;
+    private javax.swing.JLabel errorMessage;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel registerButton;
-    private javax.swing.JTextField senhaInput;
+    private javax.swing.JPasswordField senhaInput;
     // End of variables declaration//GEN-END:variables
 }
